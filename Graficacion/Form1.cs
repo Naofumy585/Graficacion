@@ -246,11 +246,23 @@ namespace Graficacion
             txta2.Clear();
             txtb2.Clear();
 
+
             // Limpiar el DataGridView
             dataGridViewResultados.Rows.Clear();
+            toolTip1.SetToolTip(chartResultados, "");
 
-            // Limpiar la gráfica
-            chartResultados.Series.Clear();
+            // Limpiar las series y los puntos del gráfico (excepto la primera serie)
+            while (chartResultados.Series.Count > 1)
+            {
+                chartResultados.Series.RemoveAt(1);
+            }
+            chartResultados.Series[0].Points.Clear();
+
+        }
+
+        private void chartResultados_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
