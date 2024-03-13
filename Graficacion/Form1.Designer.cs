@@ -30,9 +30,9 @@ namespace Graficacion
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lbltitulo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,7 +47,11 @@ namespace Graficacion
             this.btncalcular = new System.Windows.Forms.Button();
             this.btnlimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtvalorYc = new System.Windows.Forms.TextBox();
+            this.txtvalorXc = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtc1 = new System.Windows.Forms.TextBox();
             this.txtb2 = new System.Windows.Forms.TextBox();
             this.txtb1 = new System.Windows.Forms.TextBox();
             this.txta2 = new System.Windows.Forms.TextBox();
@@ -64,10 +68,6 @@ namespace Graficacion
             this.label6 = new System.Windows.Forms.Label();
             this.chartResultados = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.txtvalorXc = new System.Windows.Forms.TextBox();
-            this.txtvalorYc = new System.Windows.Forms.TextBox();
-            this.txtc1 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultados)).BeginInit();
@@ -231,6 +231,24 @@ namespace Graficacion
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             // 
+            // txtvalorYc
+            // 
+            this.txtvalorYc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvalorYc.Location = new System.Drawing.Point(302, 120);
+            this.txtvalorYc.Multiline = true;
+            this.txtvalorYc.Name = "txtvalorYc";
+            this.txtvalorYc.Size = new System.Drawing.Size(87, 40);
+            this.txtvalorYc.TabIndex = 11;
+            // 
+            // txtvalorXc
+            // 
+            this.txtvalorXc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvalorXc.Location = new System.Drawing.Point(103, 119);
+            this.txtvalorXc.Multiline = true;
+            this.txtvalorXc.Name = "txtvalorXc";
+            this.txtvalorXc.Size = new System.Drawing.Size(87, 40);
+            this.txtvalorXc.TabIndex = 10;
+            // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -254,6 +272,25 @@ namespace Graficacion
             this.groupBox2.Size = new System.Drawing.Size(435, 374);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(273, 273);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(25, 20);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "C)";
+            // 
+            // txtc1
+            // 
+            this.txtc1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtc1.Location = new System.Drawing.Point(254, 296);
+            this.txtc1.Multiline = true;
+            this.txtc1.Name = "txtc1";
+            this.txtc1.Size = new System.Drawing.Size(87, 40);
+            this.txtc1.TabIndex = 12;
             // 
             // txtb2
             // 
@@ -312,10 +349,10 @@ namespace Graficacion
             // txtcaso
             // 
             this.txtcaso.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcaso.Location = new System.Drawing.Point(207, 6);
+            this.txtcaso.Location = new System.Drawing.Point(207, 13);
             this.txtcaso.Multiline = true;
             this.txtcaso.Name = "txtcaso";
-            this.txtcaso.Size = new System.Drawing.Size(134, 32);
+            this.txtcaso.Size = new System.Drawing.Size(134, 56);
             this.txtcaso.TabIndex = 6;
             // 
             // dataGridViewResultados
@@ -381,57 +418,20 @@ namespace Graficacion
             // 
             // chartResultados
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartResultados.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartResultados.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chartResultados.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartResultados.Legends.Add(legend1);
             this.chartResultados.Location = new System.Drawing.Point(454, 12);
             this.chartResultados.Name = "chartResultados";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartResultados.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartResultados.Series.Add(series1);
             this.chartResultados.Size = new System.Drawing.Size(607, 643);
             this.chartResultados.TabIndex = 16;
             this.chartResultados.Text = "chart1";
             this.chartResultados.Click += new System.EventHandler(this.chartResultados_Click);
-            // 
-            // txtvalorXc
-            // 
-            this.txtvalorXc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvalorXc.Location = new System.Drawing.Point(103, 119);
-            this.txtvalorXc.Multiline = true;
-            this.txtvalorXc.Name = "txtvalorXc";
-            this.txtvalorXc.Size = new System.Drawing.Size(87, 40);
-            this.txtvalorXc.TabIndex = 10;
-            // 
-            // txtvalorYc
-            // 
-            this.txtvalorYc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvalorYc.Location = new System.Drawing.Point(302, 120);
-            this.txtvalorYc.Multiline = true;
-            this.txtvalorYc.Name = "txtvalorYc";
-            this.txtvalorYc.Size = new System.Drawing.Size(87, 40);
-            this.txtvalorYc.TabIndex = 11;
-            // 
-            // txtc1
-            // 
-            this.txtc1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtc1.Location = new System.Drawing.Point(254, 296);
-            this.txtc1.Multiline = true;
-            this.txtc1.Name = "txtc1";
-            this.txtc1.Size = new System.Drawing.Size(87, 40);
-            this.txtc1.TabIndex = 12;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(273, 273);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(25, 20);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "C)";
             // 
             // Form1
             // 
