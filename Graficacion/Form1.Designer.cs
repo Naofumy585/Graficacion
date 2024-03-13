@@ -30,9 +30,9 @@ namespace Graficacion
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lbltitulo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -68,6 +68,9 @@ namespace Graficacion
             this.label6 = new System.Windows.Forms.Label();
             this.chartResultados = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtb3 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultados)).BeginInit();
@@ -90,7 +93,7 @@ namespace Graficacion
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 88);
+            this.label1.Location = new System.Drawing.Point(22, 77);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 20);
             this.label1.TabIndex = 2;
@@ -101,7 +104,7 @@ namespace Graficacion
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(22, 47);
+            this.label2.Location = new System.Drawing.Point(22, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 20);
             this.label2.TabIndex = 3;
@@ -112,7 +115,7 @@ namespace Graficacion
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(221, 88);
+            this.label3.Location = new System.Drawing.Point(223, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 20);
             this.label3.TabIndex = 4;
@@ -123,7 +126,7 @@ namespace Graficacion
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(221, 47);
+            this.label4.Location = new System.Drawing.Point(225, 31);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 20);
             this.label4.TabIndex = 5;
@@ -213,6 +216,8 @@ namespace Graficacion
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtvalorYc);
             this.groupBox1.Controls.Add(this.txtvalorXc);
             this.groupBox1.Controls.Add(this.lbltitulo);
@@ -230,6 +235,7 @@ namespace Graficacion
             this.groupBox1.Size = new System.Drawing.Size(400, 244);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtvalorYc
             // 
@@ -252,6 +258,7 @@ namespace Graficacion
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupBox2.Controls.Add(this.txtb3);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.txtc1);
             this.groupBox2.Controls.Add(this.txtb2);
@@ -285,7 +292,7 @@ namespace Graficacion
             // 
             // txtc1
             // 
-            this.txtc1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtc1.Font = new System.Drawing.Font("Arial Narrow", 9.75F);
             this.txtc1.Location = new System.Drawing.Point(254, 296);
             this.txtc1.Multiline = true;
             this.txtc1.Name = "txtc1";
@@ -294,10 +301,11 @@ namespace Graficacion
             // 
             // txtb2
             // 
+            this.txtb2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtb2.Location = new System.Drawing.Point(350, 219);
             this.txtb2.Multiline = true;
             this.txtb2.Name = "txtb2";
-            this.txtb2.Size = new System.Drawing.Size(59, 32);
+            this.txtb2.Size = new System.Drawing.Size(79, 32);
             this.txtb2.TabIndex = 12;
             // 
             // txtb1
@@ -311,10 +319,11 @@ namespace Graficacion
             // 
             // txta2
             // 
+            this.txta2.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Italic);
             this.txta2.Location = new System.Drawing.Point(350, 133);
             this.txta2.Multiline = true;
             this.txta2.Name = "txta2";
-            this.txta2.Size = new System.Drawing.Size(59, 32);
+            this.txta2.Size = new System.Drawing.Size(79, 32);
             this.txta2.TabIndex = 10;
             // 
             // txta1
@@ -348,12 +357,13 @@ namespace Graficacion
             // 
             // txtcaso
             // 
-            this.txtcaso.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcaso.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtcaso.Location = new System.Drawing.Point(207, 13);
             this.txtcaso.Multiline = true;
             this.txtcaso.Name = "txtcaso";
-            this.txtcaso.Size = new System.Drawing.Size(134, 56);
+            this.txtcaso.Size = new System.Drawing.Size(165, 65);
             this.txtcaso.TabIndex = 6;
+            this.txtcaso.TextChanged += new System.EventHandler(this.txtcaso_TextChanged);
             // 
             // dataGridViewResultados
             // 
@@ -418,20 +428,52 @@ namespace Graficacion
             // 
             // chartResultados
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartResultados.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartResultados.Legends.Add(legend1);
+            chartArea7.Name = "ChartArea1";
+            this.chartResultados.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chartResultados.Legends.Add(legend7);
             this.chartResultados.Location = new System.Drawing.Point(454, 12);
             this.chartResultados.Name = "chartResultados";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartResultados.Series.Add(series1);
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chartResultados.Series.Add(series7);
             this.chartResultados.Size = new System.Drawing.Size(607, 643);
             this.chartResultados.TabIndex = 16;
             this.chartResultados.Text = "chart1";
             this.chartResultados.Click += new System.EventHandler(this.chartResultados_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(22, 123);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(75, 20);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "ValorX3=";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(221, 123);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(75, 20);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "ValorY3=";
+            // 
+            // txtb3
+            // 
+            this.txtb3.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Italic);
+            this.txtb3.Location = new System.Drawing.Point(350, 304);
+            this.txtb3.Multiline = true;
+            this.txtb3.Name = "txtb3";
+            this.txtb3.Size = new System.Drawing.Size(79, 32);
+            this.txtb3.TabIndex = 14;
             // 
             // Form1
             // 
@@ -493,6 +535,9 @@ namespace Graficacion
         private System.Windows.Forms.TextBox txtvalorXc;
         private System.Windows.Forms.TextBox txtc1;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtb3;
     }
 }
 

@@ -48,6 +48,13 @@ namespace Graficacion
 
                 // Mostrar la pendiente en el TextBox
                 txtpendiente.Text = $"AB: {pendienteAB:F2}\r\nBC: {pendienteBC:F2}\r\nCA: {pendienteCA:F2}";
+                // Determinar el tipo de caso para cada línea del triángulo
+                string tipoCasoAB = DeterminarTipoCaso(pendienteAB);
+                string tipoCasoBC = DeterminarTipoCaso(pendienteBC);
+                string tipoCasoCA = DeterminarTipoCaso(pendienteCA);
+
+                // Mostrar los tipos de caso en el TextBox txtcaso
+                txtcaso.Text = $"A, B = {tipoCasoAB}\r\nB, C = {tipoCasoBC}\r\nC, A = {tipoCasoCA}";
 
                 // Crear listas para almacenar los puntos del triángulo
                 listaX.Clear();
@@ -91,11 +98,13 @@ namespace Graficacion
                 txtb1.Text = $"B: ({Convert.ToInt32(x2)}, {Convert.ToInt32(y2)})";
                 txtc1.Text = $"C: ({Convert.ToInt32(x3)}, {Convert.ToInt32(y3)})";
 
-                // Mostrar la dirección en txta2 y txtb2
+                // Mostrar la dirección en txta2 y txtb2 , Calcular la dirección para la línea CA
                 string direccionAB = x2 > x1 ? "Izq>Der" : "Der>Izq";
-                txta2.Text = $"AB: {direccionAB}";
+                txta2.Text = $"A,B: {direccionAB}";
                 string direccionBC = x3 > x2 ? "Izq>Der" : "Der>Izq";
-                txtb2.Text = $"BC: {direccionBC}";
+                txtb2.Text = $"B,C: {direccionBC}";
+                string direccionCA = x1 > x3 ? "Izq>Der" : "Der>Izq";
+                txtb3.Text = $"C,A: {direccionCA}";
             }
             catch (FormatException)
             {
@@ -267,6 +276,21 @@ namespace Graficacion
         }
 
         private void txtvalorYb_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtcaso_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
         {
 
         }
