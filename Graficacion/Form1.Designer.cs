@@ -160,6 +160,7 @@ namespace Graficacion
             this.txtvalorYb.Name = "txtvalorYb";
             this.txtvalorYb.Size = new System.Drawing.Size(87, 40);
             this.txtvalorYb.TabIndex = 9;
+            this.txtvalorYb.TextChanged += new System.EventHandler(this.txtvalorYb_TextChanged);
             // 
             // txtpendiente
             // 

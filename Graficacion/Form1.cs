@@ -35,24 +35,13 @@ namespace Graficacion
                 double x2 = double.Parse(txtvalorXa.Text);
                 double y1 = double.Parse(txtvalorYb.Text);
                 double y2 = double.Parse(txtvalorYa.Text);
+                // Llamamos al método CalcularPendiente de la instancia de DDA
 
-                // Verificar si y1 es igual a y2
-                if (y1 == y2)
-                {
-                    MessageBox.Show("Los valores de y1 y y2 son iguales. No se puede calcular la pendiente.", "Error: System.OverflowException debido a valores demasiado grandes o demasiado pequeños", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; // Salir del método sin continuar con la operación
-                }
+                DDA dda = new DDA();
 
-                // Verificar si x1 es igual a x2 para evitar una división por cero
-                if (x1 == x2)
-                {
-                    MessageBox.Show("Los valores de x1 y x2 son iguales. No se puede calcular la pendiente.", "Error: System.OverflowException debido a valores demasiado grandes o demasiado pequeños", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return; // Salir del método sin continuar con la operación
-                }
+                // Calcular la pendiente utilizando la instancia de DDA
+                double pendiente = dda.CalcularPendiente(x1, x2, y1, y2);
 
-                // Calcular la pendiente
-                double pendiente = (y2 - y1) / (x2 - x1);
-                txtpendiente.Text = pendiente.ToString("F2");
 
                 string tipoCaso = DeterminarTipoCaso(pendiente);
                 txtcaso.Text = tipoCaso;
@@ -138,12 +127,15 @@ namespace Graficacion
             // Crear una nueva serie para la gráfica
             Series serie = new Series("Línea");
             serie.ChartType = SeriesChartType.Line;
-            serie.BorderWidth = 3; // Ajusta el ancho de la línea según tus preferencias
+            serie.BorderWidth = 4; // Ajusta el ancho de la línea según tus preferencias
 
             // Agregar puntos a la serie
             for (int i = 0; i < listaX.Count; i++)
             {
-                serie.Points.AddXY(listaX[i], listaY[i]);
+                // Escalar los puntos para que estén dentro del rango 0-150
+                double scaledX = Escalar(listaX[i]);
+                double scaledY = Escalar(listaY[i]);
+                serie.Points.AddXY(scaledX, scaledY);
             }
 
             // Marcar el punto inicial con un marcador diferente
@@ -157,11 +149,21 @@ namespace Graficacion
             // Agregar la serie al chart
             chartResultados.Series.Add(serie);
 
-            // Establecer límites manuales para el eje Y
-            chartResultados.ChartAreas[0].AxisY.Minimum = ObtenerMinimo(listaY);
-            chartResultados.ChartAreas[0].AxisY.Maximum = ObtenerMaximo(listaY);
-
+            // Establecer límites manuales para los ejes X e Y
+            chartResultados.ChartAreas[0].AxisX.Minimum = 0;
+            chartResultados.ChartAreas[0].AxisX.Maximum = 150;
+            chartResultados.ChartAreas[0].AxisY.Minimum = 0;
+            chartResultados.ChartAreas[0].AxisY.Maximum = 150;
         }
+
+        // Método para escalar un valor dentro del rango 0-150
+        private double Escalar(double value)
+        {
+            // Se asume que el rango original está entre 0 y 100
+            // Se utiliza una regla de tres simple para escalar el valor al rango 0-150
+            return (value / 100) * 150;
+        }
+
         private void ChartResultados_MouseMove(object sender, MouseEventArgs e)
         {
             Chart chart = (Chart)sender;
@@ -261,6 +263,11 @@ namespace Graficacion
         }
 
         private void chartResultados_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtvalorYb_TextChanged(object sender, EventArgs e)
         {
 
         }
