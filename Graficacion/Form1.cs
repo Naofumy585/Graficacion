@@ -46,6 +46,9 @@ namespace Graficacion
                 double pendienteBC = dda.CalcularPendiente(x2, x3, y2, y3);
                 double pendienteCA = dda.CalcularPendiente(x3, x1, y3, y1);
 
+                // Mostrar la pendiente en el TextBox
+                txtpendiente.Text = $"AB: {pendienteAB:F2}\r\nBC: {pendienteBC:F2}\r\nCA: {pendienteCA:F2}";
+
                 // Crear listas para almacenar los puntos del triángulo
                 listaX.Clear();
                 listaY.Clear();
@@ -87,6 +90,12 @@ namespace Graficacion
                 txta1.Text = $"A: ({Convert.ToInt32(x1)}, {Convert.ToInt32(y1)})";
                 txtb1.Text = $"B: ({Convert.ToInt32(x2)}, {Convert.ToInt32(y2)})";
                 txtc1.Text = $"C: ({Convert.ToInt32(x3)}, {Convert.ToInt32(y3)})";
+
+                // Mostrar la dirección en txta2 y txtb2
+                string direccionAB = x2 > x1 ? "Izq>Der" : "Der>Izq";
+                txta2.Text = $"AB: {direccionAB}";
+                string direccionBC = x3 > x2 ? "Izq>Der" : "Der>Izq";
+                txtb2.Text = $"BC: {direccionBC}";
             }
             catch (FormatException)
             {
