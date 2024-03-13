@@ -30,9 +30,9 @@ namespace Graficacion
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lbltitulo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,9 +47,12 @@ namespace Graficacion
             this.btncalcular = new System.Windows.Forms.Button();
             this.btnlimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.txtvalorYc = new System.Windows.Forms.TextBox();
             this.txtvalorXc = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtb3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtc1 = new System.Windows.Forms.TextBox();
             this.txtb2 = new System.Windows.Forms.TextBox();
@@ -68,9 +71,6 @@ namespace Graficacion
             this.label6 = new System.Windows.Forms.Label();
             this.chartResultados = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtb3 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultados)).BeginInit();
@@ -237,6 +237,29 @@ namespace Graficacion
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(221, 123);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(75, 20);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "ValorY3=";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(22, 123);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(75, 20);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "ValorX3=";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
             // txtvalorYc
             // 
             this.txtvalorYc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -280,6 +303,15 @@ namespace Graficacion
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             // 
+            // txtb3
+            // 
+            this.txtb3.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Italic);
+            this.txtb3.Location = new System.Drawing.Point(350, 304);
+            this.txtb3.Multiline = true;
+            this.txtb3.Name = "txtb3";
+            this.txtb3.Size = new System.Drawing.Size(79, 32);
+            this.txtb3.TabIndex = 14;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -293,10 +325,10 @@ namespace Graficacion
             // txtc1
             // 
             this.txtc1.Font = new System.Drawing.Font("Arial Narrow", 9.75F);
-            this.txtc1.Location = new System.Drawing.Point(254, 296);
+            this.txtc1.Location = new System.Drawing.Point(254, 304);
             this.txtc1.Multiline = true;
             this.txtc1.Name = "txtc1";
-            this.txtc1.Size = new System.Drawing.Size(87, 40);
+            this.txtc1.Size = new System.Drawing.Size(87, 32);
             this.txtc1.TabIndex = 12;
             // 
             // txtb2
@@ -428,52 +460,20 @@ namespace Graficacion
             // 
             // chartResultados
             // 
-            chartArea7.Name = "ChartArea1";
-            this.chartResultados.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.chartResultados.Legends.Add(legend7);
+            chartArea1.Name = "ChartArea1";
+            this.chartResultados.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartResultados.Legends.Add(legend1);
             this.chartResultados.Location = new System.Drawing.Point(454, 12);
             this.chartResultados.Name = "chartResultados";
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.chartResultados.Series.Add(series7);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartResultados.Series.Add(series1);
             this.chartResultados.Size = new System.Drawing.Size(607, 643);
             this.chartResultados.TabIndex = 16;
             this.chartResultados.Text = "chart1";
             this.chartResultados.Click += new System.EventHandler(this.chartResultados_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(22, 123);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 20);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "ValorX3=";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(221, 123);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(75, 20);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "ValorY3=";
-            // 
-            // txtb3
-            // 
-            this.txtb3.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Italic);
-            this.txtb3.Location = new System.Drawing.Point(350, 304);
-            this.txtb3.Multiline = true;
-            this.txtb3.Name = "txtb3";
-            this.txtb3.Size = new System.Drawing.Size(79, 32);
-            this.txtb3.TabIndex = 14;
             // 
             // Form1
             // 
