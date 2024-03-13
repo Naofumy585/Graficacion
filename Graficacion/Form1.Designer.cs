@@ -64,6 +64,9 @@ namespace Graficacion
             this.label6 = new System.Windows.Forms.Label();
             this.chartResultados = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.txtvalorXc = new System.Windows.Forms.TextBox();
+            this.txtvalorYc = new System.Windows.Forms.TextBox();
+            this.txtc1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResultados)).BeginInit();
@@ -86,7 +89,7 @@ namespace Graficacion
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(19, 114);
+            this.label1.Location = new System.Drawing.Point(22, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 20);
             this.label1.TabIndex = 2;
@@ -97,7 +100,7 @@ namespace Graficacion
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 57);
+            this.label2.Location = new System.Drawing.Point(22, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 20);
             this.label2.TabIndex = 3;
@@ -108,7 +111,7 @@ namespace Graficacion
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(221, 114);
+            this.label3.Location = new System.Drawing.Point(221, 88);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 20);
             this.label3.TabIndex = 4;
@@ -119,7 +122,7 @@ namespace Graficacion
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(221, 57);
+            this.label4.Location = new System.Drawing.Point(221, 47);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 20);
             this.label4.TabIndex = 5;
@@ -128,7 +131,7 @@ namespace Graficacion
             // txtvalorXa
             // 
             this.txtvalorXa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvalorXa.Location = new System.Drawing.Point(103, 105);
+            this.txtvalorXa.Location = new System.Drawing.Point(103, 73);
             this.txtvalorXa.Multiline = true;
             this.txtvalorXa.Name = "txtvalorXa";
             this.txtvalorXa.Size = new System.Drawing.Size(87, 40);
@@ -137,7 +140,7 @@ namespace Graficacion
             // txtvalorYa
             // 
             this.txtvalorYa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvalorYa.Location = new System.Drawing.Point(302, 105);
+            this.txtvalorYa.Location = new System.Drawing.Point(302, 74);
             this.txtvalorYa.Multiline = true;
             this.txtvalorYa.Name = "txtvalorYa";
             this.txtvalorYa.Size = new System.Drawing.Size(87, 40);
@@ -146,7 +149,7 @@ namespace Graficacion
             // txtvalorXb
             // 
             this.txtvalorXb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvalorXb.Location = new System.Drawing.Point(103, 47);
+            this.txtvalorXb.Location = new System.Drawing.Point(103, 27);
             this.txtvalorXb.Multiline = true;
             this.txtvalorXb.Name = "txtvalorXb";
             this.txtvalorXb.Size = new System.Drawing.Size(87, 40);
@@ -155,7 +158,7 @@ namespace Graficacion
             // txtvalorYb
             // 
             this.txtvalorYb.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtvalorYb.Location = new System.Drawing.Point(302, 47);
+            this.txtvalorYb.Location = new System.Drawing.Point(302, 28);
             this.txtvalorYb.Multiline = true;
             this.txtvalorYb.Name = "txtvalorYb";
             this.txtvalorYb.Size = new System.Drawing.Size(87, 40);
@@ -209,6 +212,8 @@ namespace Graficacion
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupBox1.Controls.Add(this.txtvalorYc);
+            this.groupBox1.Controls.Add(this.txtvalorXc);
             this.groupBox1.Controls.Add(this.lbltitulo);
             this.groupBox1.Controls.Add(this.txtvalorYb);
             this.groupBox1.Controls.Add(this.txtvalorYa);
@@ -227,6 +232,7 @@ namespace Graficacion
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupBox2.Controls.Add(this.txtc1);
             this.groupBox2.Controls.Add(this.txtb2);
             this.groupBox2.Controls.Add(this.txtb1);
             this.groupBox2.Controls.Add(this.txta2);
@@ -387,6 +393,33 @@ namespace Graficacion
             this.chartResultados.Text = "chart1";
             this.chartResultados.Click += new System.EventHandler(this.chartResultados_Click);
             // 
+            // txtvalorXc
+            // 
+            this.txtvalorXc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvalorXc.Location = new System.Drawing.Point(103, 119);
+            this.txtvalorXc.Multiline = true;
+            this.txtvalorXc.Name = "txtvalorXc";
+            this.txtvalorXc.Size = new System.Drawing.Size(87, 40);
+            this.txtvalorXc.TabIndex = 10;
+            // 
+            // txtvalorYc
+            // 
+            this.txtvalorYc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtvalorYc.Location = new System.Drawing.Point(302, 120);
+            this.txtvalorYc.Multiline = true;
+            this.txtvalorYc.Name = "txtvalorYc";
+            this.txtvalorYc.Size = new System.Drawing.Size(87, 40);
+            this.txtvalorYc.TabIndex = 11;
+            // 
+            // txtc1
+            // 
+            this.txtc1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtc1.Location = new System.Drawing.Point(322, 65);
+            this.txtc1.Multiline = true;
+            this.txtc1.Name = "txtc1";
+            this.txtc1.Size = new System.Drawing.Size(87, 40);
+            this.txtc1.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,6 +477,9 @@ namespace Graficacion
         private System.Windows.Forms.Label lbla;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartResultados;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TextBox txtvalorYc;
+        private System.Windows.Forms.TextBox txtvalorXc;
+        private System.Windows.Forms.TextBox txtc1;
     }
 }
 

@@ -31,40 +31,48 @@ namespace Graficacion
             try
             {
                 // Obtener los valores de los TextBox
-                double x1 = double.Parse(txtvalorXb.Text);
-                double x2 = double.Parse(txtvalorXa.Text);
-                double y1 = double.Parse(txtvalorYb.Text);
-                double y2 = double.Parse(txtvalorYa.Text);
-                // Llamamos al método CalcularPendiente de la instancia de DDA
+                double x1 = double.Parse(txtvalorXa.Text);
+                double y1 = double.Parse(txtvalorYa.Text);
+                double x2 = double.Parse(txtvalorXb.Text);
+                double y2 = double.Parse(txtvalorYb.Text);
+                double x3 = double.Parse(txtvalorXc.Text);
+                double y3 = double.Parse(txtvalorYc.Text);
 
+                // Llamamos al método CalcularPendiente de la instancia de DDA
                 DDA dda = new DDA();
 
-                // Calcular la pendiente utilizando la instancia de DDA
-                double pendiente = dda.CalcularPendiente(x1, x2, y1, y2);
+                // Calcular la pendiente para los lados del triángulo
+                double pendienteAB = dda.CalcularPendiente(x1, x2, y1, y2);
+                double pendienteBC = dda.CalcularPendiente(x2, x3, y2, y3);
+                double pendienteCA = dda.CalcularPendiente(x3, x1, y3, y1);
 
-
-                string tipoCaso = DeterminarTipoCaso(pendiente);
-                txtcaso.Text = tipoCaso;
-
-                // Calcular la dirección para x
-                string direccionX = x2 > x1 ? "Izq>Der" : "Der>Izq";
-                txta2.Text = direccionX;
-
-                // Calcular la dirección para y
-                string direccionY = y2 > y1 ? "Abj>Arrb" : "Arrb<Abj";
-                txtb2.Text = direccionY;
-
-                // Limpiar listas
+                // Crear listas para almacenar los puntos del triángulo
                 listaX.Clear();
                 listaY.Clear();
 
-                // Calcular nuevos valores utilizando la pendiente
-                for (int i = 0; i < 10; i++)
+                // Calcular nuevos valores utilizando la pendiente para el lado AB
+                for (int i = 0; i <= 10; i++)
                 {
-                    double x = x1 + i; // Puedes ajustar la variación de x según tus necesidades
-                    double y = y1 + pendiente * (x - x1);
+                    double x = x1 + i * (x2 - x1) / 10;
+                    double y = y1 + pendienteAB * (x - x1);
+                    listaX.Add(x);
+                    listaY.Add(y);
+                }
 
-                    // Agregar valores a las listas
+                // Calcular nuevos valores utilizando la pendiente para el lado BC
+                for (int i = 0; i <= 10; i++)
+                {
+                    double x = x2 + i * (x3 - x2) / 10;
+                    double y = y2 + pendienteBC * (x - x2);
+                    listaX.Add(x);
+                    listaY.Add(y);
+                }
+
+                // Calcular nuevos valores utilizando la pendiente para el lado CA
+                for (int i = 0; i <= 10; i++)
+                {
+                    double x = x3 + i * (x1 - x3) / 10;
+                    double y = y3 + pendienteCA * (x - x3);
                     listaX.Add(x);
                     listaY.Add(y);
                 }
@@ -75,30 +83,25 @@ namespace Graficacion
                 // Mostrar en el Chart
                 MostrarEnChart();
 
-                // Mostrar valores de x1, y1 en txta1 y x2, y2 en txtb1
-                txta1.Text = $"X1: {Convert.ToInt32(x1)}, Y1: {Convert.ToInt32(y1)}";
-                txtb1.Text = $"X2: {Convert.ToInt32(x2)}, Y2: {Convert.ToInt32(y2)}";
+                // Mostrar valores de los puntos en los TextBox
+                txta1.Text = $"A: ({Convert.ToInt32(x1)}, {Convert.ToInt32(y1)})";
+                txtb1.Text = $"B: ({Convert.ToInt32(x2)}, {Convert.ToInt32(y2)})";
+                txtc1.Text = $"C: ({Convert.ToInt32(x3)}, {Convert.ToInt32(y3)})";
             }
             catch (FormatException)
             {
                 MessageBox.Show("Uno o más valores ingresados no son números válidos.", "Error: Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Restart(); // Reiniciar la aplicación
-                Environment.Exit(0);   // Salir completamente para asegurar el reinicio
             }
             catch (OverflowException)
             {
                 MessageBox.Show("Uno o más valores ingresados son demasiado grandes o demasiado pequeños para ser procesados.", "Error: Overflow", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Restart(); // Reiniciar la aplicación
-                Environment.Exit(0);   // Salir completamente para asegurar el reinicio
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Restart(); // Reiniciar la aplicación
-                Environment.Exit(0);   // Salir completamente para asegurar el reinicio
             }
-        
         }
+
         private void MostrarEnDataGridView()
         {
             dataGridViewResultados.Rows.Clear();
@@ -116,8 +119,6 @@ namespace Graficacion
                 // Agregar una nueva fila con los valores formateados
                 dataGridViewResultados.Rows.Add(xFormateado, yFormateado);
             }
-
-
         }
 
         private void MostrarEnChart()
@@ -125,26 +126,25 @@ namespace Graficacion
             chartResultados.Series.Clear();
 
             // Crear una nueva serie para la gráfica
-            Series serie = new Series("Línea");
+            Series serie = new Series("Triángulo");
             serie.ChartType = SeriesChartType.Line;
-            serie.BorderWidth = 4; // Ajusta el ancho de la línea según tus preferencias
+            serie.BorderWidth = 2; // Ajusta el ancho de la línea según tus preferencias
 
-            // Agregar puntos a la serie
+            // Agregar puntos a la serie para el triángulo
             for (int i = 0; i < listaX.Count; i++)
             {
-                // Escalar los puntos para que estén dentro del rango 0-150
                 double scaledX = Escalar(listaX[i]);
                 double scaledY = Escalar(listaY[i]);
                 serie.Points.AddXY(scaledX, scaledY);
+
+                // Marcar los vértices del triángulo con un marcador diferente
+                if (i == 0 || i == 11 || i == 22)
+                {
+                    DataPoint vertex = serie.Points[serie.Points.Count - 1];
+                    vertex.MarkerStyle = MarkerStyle.Diamond;
+                    vertex.MarkerColor = Color.Green;
+                }
             }
-
-            // Marcar el punto inicial con un marcador diferente
-            serie.Points[0].MarkerStyle = MarkerStyle.Circle;
-            serie.Points[0].MarkerColor = System.Drawing.Color.Red;
-
-            // Marcar el punto final con un marcador diferente
-            serie.Points[listaX.Count - 1].MarkerStyle = MarkerStyle.Square;
-            serie.Points[listaX.Count - 1].MarkerColor = System.Drawing.Color.Blue;
 
             // Agregar la serie al chart
             chartResultados.Series.Add(serie);
@@ -156,11 +156,8 @@ namespace Graficacion
             chartResultados.ChartAreas[0].AxisY.Maximum = 150;
         }
 
-        // Método para escalar un valor dentro del rango 0-150
         private double Escalar(double value)
         {
-            // Se asume que el rango original está entre 0 y 100
-            // Se utiliza una regla de tres simple para escalar el valor al rango 0-150
             return (value / 100) * 150;
         }
 
@@ -170,31 +167,27 @@ namespace Graficacion
 
             try
             {
-                // Obtener las coordenadas del mouse en relación con el gráfico
                 Point mousePoint = new Point(e.X, e.Y);
                 HitTestResult result = chart.HitTest(mousePoint.X, mousePoint.Y);
 
-                // Verificar si el puntero está sobre un punto de la serie
                 if (result.ChartElementType == ChartElementType.DataPoint)
                 {
                     DataPoint dataPoint = chart.Series[0].Points[result.PointIndex];
                     string coordenadas = $"X: {dataPoint.XValue:F2}, Y: {dataPoint.YValues[0]:F2}";
 
-                    // Mostrar las coordenadas en algún lugar, como un ToolTip
                     toolTip1.SetToolTip(chart, coordenadas);
                 }
                 else
                 {
-                    // Si no está sobre un punto, borrar el ToolTip
                     toolTip1.SetToolTip(chart, "");
                 }
             }
             catch (OverflowException ex)
             {
-                // Manejar la excepción de desbordamiento
                 Console.WriteLine($"Error de desbordamiento: {ex.Message}");
             }
         }
+
         private string DeterminarTipoCaso(double pendiente)
         {
             if (pendiente < 1)
@@ -207,7 +200,7 @@ namespace Graficacion
             }
             else if (pendiente == 1)
             {
-                double angulo = Math.Atan(pendiente) * (180 / Math.PI); // Convertir a grados
+                double angulo = Math.Atan(pendiente) * (180 / Math.PI);
                 return $"-M=1 ({angulo:F2} grados)";
             }
             else if (pendiente == 0)
@@ -217,9 +210,9 @@ namespace Graficacion
             else
             {
                 MessageBox.Show("Ingrese datos válidos. Asegúrese de que y2 sea mayor que y1 o y1 sea menor que y2.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Restart(); // Reiniciar la aplicación
-                Environment.Exit(0);   // Salir completamente para asegurar el reinicio
-                return "-Error"; // Este return es solo para cumplir con la firma del método, pero en realidad no se ejecutará.
+                Application.Restart();
+                Environment.Exit(0);
+                return "-Error";
             }
         }
 
@@ -228,7 +221,6 @@ namespace Graficacion
             return valores.Min();
         }
 
-        // Método para obtener el valor máximo de una lista de doubles
         private double ObtenerMaximo(List<double> valores)
         {
             return valores.Max();
@@ -236,30 +228,28 @@ namespace Graficacion
 
         private void btnlimpiar_Click(object sender, EventArgs e)
         {
-            // Limpiar los TextBox
             txtvalorXb.Clear();
             txtvalorXa.Clear();
             txtvalorYb.Clear();
             txtvalorYa.Clear();
+            txtvalorXc.Clear();
+            txtvalorYc.Clear();
             txtpendiente.Clear();
             txtcaso.Clear();
             txta1.Clear();
             txtb1.Clear();
+            txtc1.Clear();
             txta2.Clear();
             txtb2.Clear();
 
-
-            // Limpiar el DataGridView
             dataGridViewResultados.Rows.Clear();
             toolTip1.SetToolTip(chartResultados, "");
 
-            // Limpiar las series y los puntos del gráfico (excepto la primera serie)
             while (chartResultados.Series.Count > 1)
             {
                 chartResultados.Series.RemoveAt(1);
             }
             chartResultados.Series[0].Points.Clear();
-
         }
 
         private void chartResultados_Click(object sender, EventArgs e)
