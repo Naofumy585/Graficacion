@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,8 +123,13 @@ namespace Graficacion
 
         private void MostrarEnDataGridView()
         {
+            // Limpiar los DataGridView
             dataGridViewResultados.Rows.Clear();
-            for (int i = 0; i < listaX.Count; i++)
+            dataGridViewResultados2.Rows.Clear();
+            dataGridViewResultados3.Rows.Clear();
+
+            // Llenar los valores para A, B en dataGridViewResultados
+            for (int i = 0; i < 11; i++)
             {
                 double x = listaX[i];
                 double y = listaY[i];
@@ -137,16 +143,48 @@ namespace Graficacion
                 // Agregar una nueva fila con los valores formateados
                 dataGridViewResultados.Rows.Add(xFormateado, yFormateado);
             }
+
+            // Llenar los valores para B, C en dataGridViewResultados2
+            for (int i = 11; i < 22; i++)
+            {
+                double x = listaX[i];
+                double y = listaY[i];
+
+                // Formatear el valor de X como entero
+                string xFormateado = x.ToString("F0");
+
+                // Formatear el valor de Y según si tiene decimales o no
+                string yFormateado = y % 1 == 0 ? y.ToString("F0") : y.ToString("F2");
+
+                // Agregar una nueva fila con los valores formateados
+                dataGridViewResultados2.Rows.Add(xFormateado, yFormateado);
+            }
+
+            // Llenar los valores para C, A en dataGridViewResultados3
+            for (int i = 22; i < listaX.Count; i++)
+            {
+                double x = listaX[i];
+                double y = listaY[i];
+
+                // Formatear el valor de X como entero
+                string xFormateado = x.ToString("F0");
+
+                // Formatear el valor de Y según si tiene decimales o no
+                string yFormateado = y % 1 == 0 ? y.ToString("F0") : y.ToString("F2");
+
+                // Agregar una nueva fila con los valores formateados
+                dataGridViewResultados3.Rows.Add(xFormateado, yFormateado);
+            }
         }
 
         private void MostrarEnChart()
         {
             chartResultados.Series.Clear();
 
-            // Crear una nueva serie para la gráfica
+            // Crear una nueva serie para el triángulo
             Series serie = new Series("Triángulo");
             serie.ChartType = SeriesChartType.Line;
-            serie.BorderWidth = 2; // Ajusta el ancho de la línea según tus preferencias
+            serie.BorderWidth = 5; // Ajustar el ancho de la línea según tus preferencias
 
             // Agregar puntos a la serie para el triángulo
             for (int i = 0; i < listaX.Count; i++)
@@ -155,17 +193,53 @@ namespace Graficacion
                 double scaledY = Escalar(listaY[i]);
                 serie.Points.AddXY(scaledX, scaledY);
 
-                // Marcar los vértices del triángulo con un marcador diferente
+                // Marcar los puntos donde se unen las líneas con un marcador verde y la etiqueta de la coordenada
                 if (i == 0 || i == 11 || i == 22)
                 {
                     DataPoint vertex = serie.Points[serie.Points.Count - 1];
                     vertex.MarkerStyle = MarkerStyle.Diamond;
                     vertex.MarkerColor = Color.Green;
+
+                    // Agregar etiqueta de la coordenada
+                    string coordenada = "";
+                    if (i == 0)
+                        coordenada = "A";
+                    else if (i == 11)
+                        coordenada = "B";
+                    else if (i == 22)
+                        coordenada = "C";
+                    vertex.Label = coordenada;
+                    vertex.IsValueShownAsLabel = true;
                 }
             }
 
-            // Agregar la serie al chart
+            // Agregar la serie del triángulo al chart
             chartResultados.Series.Add(serie);
+
+            // Calcular el área del triángulo
+            double baseTriangulo = Math.Abs(listaX[0] - listaX[22]); // Base
+            double alturaTriangulo = Math.Abs(listaY[22] - listaY[0]); // Altura
+            double areaTriangulo = (baseTriangulo * alturaTriangulo) / 2; // Área
+
+            // Calcular el centroide del triángulo
+            double centroideX = (listaX[0] + listaX[11] + listaX[22]) / 3;
+            double centroideY = (listaY[0] + listaY[11] + listaY[22]) / 3;
+
+            // Crear una nueva serie para el área del triángulo
+            Series serieArea = new Series("Área");
+            serieArea.ChartType = SeriesChartType.Area;
+
+            // Agregar puntos a la serie para formar el área del triángulo
+            serieArea.Points.AddXY(Escalar(listaX[0]), Escalar(listaY[0])); // Vértice A
+            serieArea.Points.AddXY(Escalar(listaX[11]), Escalar(listaY[11])); // Punto medio de la base
+            serieArea.Points.AddXY(Escalar(listaX[22]), Escalar(listaY[22])); // Vértice C
+            serieArea.Points.AddXY(Escalar(listaX[0]), Escalar(listaY[0])); // Cerrar el polígono
+
+            // Establecer el color del área del triángulo
+            serieArea.Color = Color.FromArgb(128, Color.LightSkyBlue); // Color azul con transparencia
+
+            // Agregar la serie del área al chart
+            chartResultados.Series.Add(serieArea);
 
             // Establecer límites manuales para los ejes X e Y
             chartResultados.ChartAreas[0].AxisX.Minimum = 0;
@@ -173,6 +247,8 @@ namespace Graficacion
             chartResultados.ChartAreas[0].AxisY.Minimum = 0;
             chartResultados.ChartAreas[0].AxisY.Maximum = 150;
         }
+
+
 
         private double Escalar(double value)
         {
@@ -291,6 +367,11 @@ namespace Graficacion
         }
 
         private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
