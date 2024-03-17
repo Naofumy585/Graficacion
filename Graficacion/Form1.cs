@@ -227,7 +227,7 @@ namespace Graficacion
 
             // Crear una nueva serie para el área del triángulo
             Series serieArea = new Series("Área");
-            serieArea.ChartType = SeriesChartType.Area;
+            serieArea.ChartType = SeriesChartType.Line;
 
             // Agregar puntos a la serie para formar el área del triángulo
             serieArea.Points.AddXY(Escalar(listaX[0]), Escalar(listaY[0])); // Vértice A
@@ -372,6 +372,16 @@ namespace Graficacion
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtvalorYa_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtvalorXa_TextChanged(object sender, EventArgs e)
         {
 
         }
