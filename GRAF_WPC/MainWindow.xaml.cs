@@ -182,22 +182,23 @@ namespace GRAF_WPC
                 }
             }
         }
-        private void Dibujar_RellenarC(double xInicio, double yInicio, double radio)
+        private void Dibujar_RellenarC(double xCentro, double yCentro, double radio)
         {
-            // Calcular las coordenadas de los puntos de la circunferencia utilizando el algoritmo DDA
             List<DataPoint> puntosCircunferenciaPlot = new List<DataPoint>();
-            double xCentro = xInicio; // Usar el valor de xInicio como el centro X
-            double yCentro = yInicio; // Usar el valor de yInicio como el centro Y
 
-            // Agregar los puntos de la circunferencia al resultado
-            for (double theta = 0; theta < 360; theta += 0.1)
+            // Definir el ángulo de inicio y final para dibujar solo la porción del círculo correspondiente al radio dado
+            double anguloInicio = 0;
+            double anguloFin = 2 * Math.PI;
+
+            // Calcular los puntos de la circunferencia
+            for (double theta = anguloInicio; theta <= anguloFin; theta += 0.1)
             {
-                double x = xCentro + radio * Math.Cos(theta * Math.PI / 180.0);
-                double y = yCentro + radio * Math.Sin(theta * Math.PI / 180.0);
+                double x = xCentro + radio * Math.Cos(theta);
+                double y = yCentro + radio * Math.Sin(theta);
                 puntosCircunferenciaPlot.Add(new DataPoint(x, y));
             }
 
-            // Crear un nuevo PlotModel para mostrar la circunferencia y el círculo
+            // Crear un nuevo PlotModel para mostrar el círculo
             var plotModel = new PlotModel();
 
             // Agregar un AreaSeries para rellenar el círculo
@@ -207,6 +208,20 @@ namespace GRAF_WPC
             };
             circunferenciaRellenaSeries.Points.AddRange(puntosCircunferenciaPlot);
             plotModel.Series.Add(circunferenciaRellenaSeries);
+
+            // Configurar los ejes del gráfico para que tengan una escala de 300x300 y el círculo esté centrado
+            plotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Bottom, Minimum = xCentro - 150, Maximum = xCentro + 150 });
+            plotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left, Minimum = yCentro - 150, Maximum = yCentro + 150 });
+
+            // Agregar un círculo al gráfico
+            var circleAnnotation = new OxyPlot.Annotations.EllipseAnnotation
+            {
+                X = xCentro,
+                Y = yCentro,
+                Width = radio * 2,
+                Height = radio * 2
+            };
+            plotModel.Annotations.Add(circleAnnotation);
 
             // Asignar el PlotModel al PlotView
             GraficaC.Model = plotModel;
