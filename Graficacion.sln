@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graficacion", "Graficacion\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GRAF_WPC", "GRAF_WPC\GRAF_WPC.csproj", "{C15F4A78-F606-40D7-99C2-05BC6E519977}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GRAF_WPE", "GRAF_WPE\GRAF_WPE.csproj", "{228FD319-3588-4158-9BCF-CFFF78C08C18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C15F4A78-F606-40D7-99C2-05BC6E519977}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C15F4A78-F606-40D7-99C2-05BC6E519977}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C15F4A78-F606-40D7-99C2-05BC6E519977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{228FD319-3588-4158-9BCF-CFFF78C08C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{228FD319-3588-4158-9BCF-CFFF78C08C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{228FD319-3588-4158-9BCF-CFFF78C08C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{228FD319-3588-4158-9BCF-CFFF78C08C18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
