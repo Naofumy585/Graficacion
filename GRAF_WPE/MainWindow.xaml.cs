@@ -14,10 +14,12 @@ using System.Windows.Navigation;
 using Graficacion;
 using GRAF_WPC;
 using System.Windows.Shapes;
+using OxyPlot.Axes;
 using OxyPlot;
 using OxyPlot.Annotations;
 using OxyPlot.Wpf;
 using OxyPlot.Series;
+using System.Windows.Media.Media3D;
 
 namespace GRAF_WPE
 {
@@ -38,6 +40,7 @@ namespace GRAF_WPE
         }
         private void btn_Calcular_Click(object sender, RoutedEventArgs e)
         {
+
             // Obtener el valor de los radios desde los TextBoxes
             if (!double.TryParse(textRx.Text, out double radioX) || !double.TryParse(TexRy.Text, out double radioY))
             {
@@ -59,21 +62,11 @@ namespace GRAF_WPE
             }
 
             // Calcular los puntos de la elipse y mostrarlos en las tablas
-            CalcularYMostrarElipse(xCentro, yCentro, radioX, radioY);
-
-            // Dibujar la elipse en el gráfico
+            var puntosElipse = CalcularPuntosElipse(xCentro, yCentro, radioX, radioY);
+            CalcularPuntosElipseT(radioX, radioY, xCentro, yCentro);
             DibujarElipse(xCentro, yCentro, radioX, radioY);
+            MostrarCoordenadasEnTablas(radioX, radioY, xCentro, yCentro);
         }
-
-        private void CalcularYMostrarElipse(double xCentro, double yCentro, double radioX, double radioY)
-        {
-            // Calcular los puntos de la elipse utilizando el algoritmo proporcionado
-            List<Tuple<int, double, double, double>> puntosElipse = CalcularPuntosElipse(xCentro, yCentro, radioX, radioY);
-
-            // Mostrar las coordenadas de los puntos en las tablas
-            MostrarCoordenadasEnTablas(puntosElipse);
-        }
-
         private List<Tuple<int, double, double, double>> CalcularPuntosElipse(double xCentro, double yCentro, double radioX, double radioY)
         {
             List<Tuple<int, double, double, double>> puntos = new List<Tuple<int, double, double, double>>();
@@ -87,10 +80,10 @@ namespace GRAF_WPE
             // Región 1
             while (dx < dy)
             {
-                puntos.Add(new Tuple<int, double, double, double>(1, Math.Round(y + yCentro, 4), Math.Round(x + xCentro, 4), Math.Round(y + yCentro, 4)));
-                puntos.Add(new Tuple<int, double, double, double>(2, Math.Round(-y + yCentro, 4), Math.Round(x + xCentro, 4), Math.Round(-y + yCentro, 4)));
-                puntos.Add(new Tuple<int, double, double, double>(3, Math.Round(-y + yCentro, 4), Math.Round(-x + xCentro, 4), Math.Round(-y + yCentro, 4)));
-                puntos.Add(new Tuple<int, double, double, double>(4, Math.Round(y + yCentro, 4), Math.Round(-x + xCentro, 4), Math.Round(y + yCentro, 4)));
+                puntos.Add(new Tuple<int, double, double, double>(1, Math.Round(x + xCentro, 4), Math.Round(y + yCentro, 4), Math.Round(x + xCentro, 4)));
+                puntos.Add(new Tuple<int, double, double, double>(2, Math.Round(x + xCentro, 4), Math.Round(-y + yCentro, 4), Math.Round(x + xCentro, 4)));
+                puntos.Add(new Tuple<int, double, double, double>(3, Math.Round(-x + xCentro, 4), Math.Round(-y + yCentro, 4), Math.Round(-x + xCentro, 4)));
+                puntos.Add(new Tuple<int, double, double, double>(4, Math.Round(-x + xCentro, 4), Math.Round(y + yCentro, 4), Math.Round(-x + xCentro, 4)));
 
                 x++;
 
@@ -112,10 +105,10 @@ namespace GRAF_WPE
             double p2 = Math.Pow(radioY, 2) * Math.Pow((x + 0.5), 2) + Math.Pow(radioX, 2) * Math.Pow((y - 1), 2) - Math.Pow(radioX, 2) * Math.Pow(radioY, 2);
             while (y >= 0)
             {
-                puntos.Add(new Tuple<int, double, double, double>(1, Math.Round(y + yCentro, 4), Math.Round(x + xCentro, 4), Math.Round(y + yCentro, 4)));
-                puntos.Add(new Tuple<int, double, double, double>(2, Math.Round(-y + yCentro, 4), Math.Round(x + xCentro, 4), Math.Round(-y + yCentro, 4)));
-                puntos.Add(new Tuple<int, double, double, double>(3, Math.Round(-y + yCentro, 4), Math.Round(-x + xCentro, 4), Math.Round(-y + yCentro, 4)));
-                puntos.Add(new Tuple<int, double, double, double>(4, Math.Round(y + yCentro, 4), Math.Round(-x + xCentro, 4), Math.Round(y + yCentro, 4)));
+                puntos.Add(new Tuple<int, double, double, double>(1, Math.Round(x + xCentro, 4), Math.Round(y + yCentro, 4), Math.Round(x + xCentro, 4)));
+                puntos.Add(new Tuple<int, double, double, double>(2, Math.Round(x + xCentro, 4), Math.Round(-y + yCentro, 4), Math.Round(x + xCentro, 4)));
+                puntos.Add(new Tuple<int, double, double, double>(3, Math.Round(-x + xCentro, 4), Math.Round(-y + yCentro, 4), Math.Round(-x + xCentro, 4)));
+                puntos.Add(new Tuple<int, double, double, double>(4, Math.Round(-x + xCentro, 4), Math.Round(y + yCentro, 4), Math.Round(-x + xCentro, 4)));
 
                 y--;
 
@@ -135,101 +128,219 @@ namespace GRAF_WPE
 
             return puntos;
         }
-        private void MostrarCoordenadasEnTablas(List<Tuple<int, double, double, double>> puntosElipse)
+       
+        private List<Tuple<int, double, double>> CalcularPuntosElipseT(double radioX, double radioY, double xCentro, double yCentro)
         {
-            // Limpiar los DataGrids
-            LimpiarDataGrid(Pk1);
-            LimpiarDataGrid(Pk2);
-            LimpiarDataGrid(Pk3);
-            LimpiarDataGrid(Pk4);
+            List<Tuple<int, double, double>> puntosElipse = new List<Tuple<int, double, double>>();
 
-            // Dividir los puntos en las cuatro tablas según las condiciones dadas
-            List<Tuple<int, double, double, double>> pk1 = new List<Tuple<int, double, double, double>>();
-            List<Tuple<int, double, double, double>> pk2 = new List<Tuple<int, double, double, double>>();
-            List<Tuple<int, double, double, double>> pk3 = new List<Tuple<int, double, double, double>>();
-            List<Tuple<int, double, double, double>> pk4 = new List<Tuple<int, double, double, double>>();
+            // Inicialización de variables
+            double x = 0;
+            double y = radioY;
+            double p1 = radioY * radioY - radioX * radioX * radioY + 0.25 * radioX * radioX;
+            double dx = 2 * radioY * radioY * x;
+            double dy = 2 * radioX * radioX * y;
 
-            foreach (var punto in puntosElipse)
+            // Región I
+            while (dx < dy)
             {
-                int x = (int)punto.Item3;
-                int y = (int)punto.Item4;
+                // Agregar puntos
+                puntosElipse.Add(new Tuple<int, double, double>((int)x, xCentro + x, yCentro + y));
+                puntosElipse.Add(new Tuple<int, double, double>((int)x, xCentro + x, yCentro - y));
+                puntosElipse.Add(new Tuple<int, double, double>((int)x, xCentro - x, yCentro + y));
+                puntosElipse.Add(new Tuple<int, double, double>((int)x, xCentro - x, yCentro - y));
 
-                if (x >= -8 && x <= -1 && y >= -6 && y <= 0)
+                // Calcular siguiente punto
+                x++;
+                dx += 2 * radioY * radioY;
+                if (p1 < 0)
                 {
-                    pk1.Add(punto);
+                    p1 += dx + radioY * radioY;
                 }
-                else if (x >= 1 && x <= 8 && y >= -6 && y <= 0)
+                else
                 {
-                    pk2.Add(punto);
-                }
-                else if (x >= -8 && x <= -1 && y >= 1 && y <= 6)
-                {
-                    pk3.Add(punto);
-                }
-                else if (x >= 1 && x <= 8 && y >= 1 && y <= 6)
-                {
-                    pk4.Add(punto);
+                    y--;
+                    dy -= 2 * radioX * radioX;
+                    p1 += dx - dy + radioY * radioY;
                 }
             }
 
-            // Mostrar los puntos en las tablas correspondientes
-            MostrarEnTabla(Pk1, pk1);
-            MostrarEnTabla(Pk2, pk2);
-            MostrarEnTabla(Pk3, pk3);
-            MostrarEnTabla(Pk4, pk4);
-
-        }
-        private void MostrarEnTabla(DataGrid dataGrid, List<Tuple<int, double, double, double>> puntos)
-        {
-            foreach (var punto in puntos)
+            // Región II
+            double p2 = radioY * radioY * (x + 0.5) * (x + 0.5) + radioX * radioX * (y - 1) * (y - 1) - radioX * radioX * radioY * radioY;
+            while (y > 0)
             {
-                int iteracion = punto.Item1;
-                double x = punto.Item3;
-                double y = punto.Item4;
+                // Agregar puntos
+                puntosElipse.Add(new Tuple<int, double, double>((int)x, xCentro + x, yCentro + y));
+                puntosElipse.Add(new Tuple<int, double, double>((int)x, xCentro + x, yCentro - y));
+                puntosElipse.Add(new Tuple<int, double, double>((int)x, xCentro - x, yCentro + y));
+                puntosElipse.Add(new Tuple<int, double, double>((int)x, xCentro - x, yCentro - y));
 
-                dataGrid.Items.Add(new { Iteración = iteracion, X = x, Y = y });
+                // Calcular siguiente punto
+                y--;
+                dy -= 2 * radioX * radioX;
+                if (p2 > 0)
+                {
+                    p2 -= dy + radioX * radioX;
+                }
+                else
+                {
+                    x++;
+                    dx += 2 * radioY * radioY;
+                    p2 += dx - dy + radioX * radioX;
+                }
+            }
+
+            return puntosElipse;
+        }
+        private void MostrarCoordenadasEnTablas(double radioX, double radioY, double xCentro, double yCentro)
+        {
+            // Calcular los puntos de la elipse
+            var puntosElipse = CalcularPuntosElipse(radioX, radioY, xCentro, yCentro);
+
+            // Limpiar los DataGrids
+            for (int i = 1; i <= 4; i++)
+            {
+                DataGrid dataGrid = FindName($"Pk{i}") as DataGrid;
+                if (dataGrid != null)
+                {
+                    dataGrid.Items.Clear();
+                    dataGrid.Columns.Clear();
+                    if (i == 1)
+                    {
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Pk", Binding = new Binding("Item1") });
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "X", Binding = new Binding("Item2") });
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Y", Binding = new Binding("Item3") });
+                    }
+                    else if (i == 2)
+                    {
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "X", Binding = new Binding("Item2") });
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "-Y", Binding = new Binding("Item3") });
+                    }
+                    else if (i == 3)
+                    {
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "-X", Binding = new Binding("Item2") });
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "-Y", Binding = new Binding("Item3") });
+                    }
+                    else if (i == 4)
+                    {
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "-X", Binding = new Binding("Item2") });
+                        dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Y", Binding = new Binding("Item3") });
+                    }
+                }
+            }
+
+            // Agregar las coordenadas a las tablas
+            foreach (var punto in puntosElipse)
+            {
+                double x = punto.Item2;
+                double y = punto.Item3;
+
+                for (int i = 1; i <= 4; i++)
+                {
+                    DataGrid dataGrid = FindName($"Pk{i}") as DataGrid;
+                    if (dataGrid != null)
+                    {
+                        double newX, newY;
+
+                        // Ajustar coordenadas según el cuadrante
+                        switch (i)
+                        {
+                            case 1:
+                                newX = x;
+                                newY = y;
+                                break;
+                            case 2:
+                                newX = x;
+                                newY = -y;
+                                break;
+                            case 3:
+                                newX = -x;
+                                newY = -y;
+                                break;
+                            case 4:
+                                newX = -x;
+                                newY = y;
+                                break;
+                            default:
+                                newX = x;
+                                newY = y;
+                                break;
+                        }
+
+                        // Trasladar al centro
+                        newX += xCentro;
+                        newY += yCentro;
+
+                        dataGrid.Items.Add(new Tuple<int, double, double>((int)punto.Item1, newX, newY));
+                    }
+                }
             }
         }
         private void LimpiarDataGrid(DataGrid dataGrid)
         {
             dataGrid.Items.Clear();
         }
-
         private void DibujarElipse(double xCentro, double yCentro, double radioX, double radioY)
         {
             // Calcular los puntos de la elipse utilizando el algoritmo proporcionado
             List<Tuple<int, double, double, double>> puntosElipse = CalcularPuntosElipse(xCentro, yCentro, radioX, radioY);
 
-            // Convertir los puntos a DataPoint
-            List<DataPoint> puntosElipseDataPoint = ConvertirATuplas(puntosElipse);
-
             // Crear un nuevo PlotModel para mostrar la elipse
             var plotModel = new PlotModel();
 
-            // Agregar una serie de línea para dibujar la elipse
-            var elipseSeries = new LineSeries
-            {
-                Color = OxyColors.Blue,
-                StrokeThickness = 2
-            };
-            elipseSeries.Points.AddRange(puntosElipseDataPoint);
-            plotModel.Series.Add(elipseSeries);
+            // Crear una serie de áreas para colorear los cuadrantes
+            var areaSeries = new AreaSeries();
 
-            // Asignar el PlotModel al PlotView
-            GraficaE.Model = plotModel;
-        }
-        private List<DataPoint> ConvertirATuplas(List<Tuple<int, double, double, double>> puntosElipse)
-        {
-            List<DataPoint> puntos = new List<DataPoint>();
+            // Dividir los puntos de la elipse en grupos según el cuadrante al que pertenecen
+            var cuadrantes = new List<List<DataPoint>>();
+            for (int i = 0; i < 4; i++)
+            {
+                cuadrantes.Add(new List<DataPoint>());
+            }
+
+            foreach (var punto in puntosElipse)
+            {
+                int cuadrante = punto.Item1;
+                double x = punto.Item3;
+                double y = punto.Item4;
+                cuadrantes[cuadrante - 1].Add(new DataPoint(x, y));
+            }
+
+            // Definir los colores para cada cuadrante
+            var colores = new List<OxyColor> { OxyColors.LightBlue, OxyColors.LightGreen, OxyColors.Black, OxyColors.LightPink };
+
+            // Agregar los cuadrantes al modelo de trazado y colorearlos
+            for (int i = 0; i < 4; i++)
+            {
+                var serie = new AreaSeries();
+                serie.Points.AddRange(cuadrantes[i]);
+                serie.Color = colores[i];
+                plotModel.Series.Add(serie);
+            }
+
+            // Agregar los puntos de la elipse como puntos individuales en color negro
+            var puntosSeries = new ScatterSeries
+            {
+                MarkerType = MarkerType.Circle,
+                MarkerSize = 3,
+                MarkerStroke = OxyColors.Black
+            };
+
             foreach (var punto in puntosElipse)
             {
                 double x = punto.Item3;
                 double y = punto.Item4;
-                puntos.Add(new DataPoint(x, y));
+                puntosSeries.Points.Add(new ScatterPoint(x, y));
             }
-            return puntos;
-        }
 
+            plotModel.Series.Add(puntosSeries);
+
+            // Configurar los ejes del gráfico
+            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "X" });
+            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Y" });
+
+            // Asignar el PlotModel al PlotView
+            GraficaE.Model = plotModel;
+        }
         private void btn_Limpiar_Click(object sender, RoutedEventArgs e)
         {
             // Limpiar TextBoxes

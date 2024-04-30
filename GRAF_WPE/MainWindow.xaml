@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:GRAF_WPE"
         mc:Ignorable="d"
         xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:helix="http://helix-toolkit.org/wpf"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FFC0C0FF">
         <Grid.ColumnDefinitions>
@@ -17,8 +18,8 @@
             <RowDefinition Height="105*"/>
             <RowDefinition Height="314*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="Pk2" HorizontalAlignment="Left" Height="144" Margin="160,100,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold" Grid.Column="0" Grid.RowSpan="2" RenderTransformOrigin="0.503,0.503" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible"/>
-        <DataGrid x:Name="Pk1" HorizontalAlignment="Left" Height="144" Margin="0,100,0,0" VerticalAlignment="Top" Width="155" FontWeight="Bold" Grid.RowSpan="2" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Visible" CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"/>
+        <DataGrid x:Name="Pk1" HorizontalAlignment="Left" Height="149" Margin="0,100,0,0" VerticalAlignment="Top" Width="155" FontWeight="Bold" Grid.Column="0" RenderTransformOrigin="0.503,0.503" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Grid.RowSpan="2"/>
+        <DataGrid x:Name="Pk2" HorizontalAlignment="Left" Height="149" Margin="160,100,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold" VerticalScrollBarVisibility="Visible" UseLayoutRounding="False" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Visible" CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" Grid.RowSpan="2"/>
         <DataGrid x:Name="Pk3" HorizontalAlignment="Left" Height="167" Margin="0,144,0,0" VerticalAlignment="Top" Width="155" FontWeight="Bold" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Grid.Row="1"/>
         <DataGrid x:Name="Pk4" HorizontalAlignment="Left" Height="167" Margin="160,144,0,0" VerticalAlignment="Top" Width="151" FontWeight="Bold" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Grid.Row="1"/>
 
@@ -28,13 +29,13 @@
             <Button x:Name="btn_Calcular" Content="Calcular" VerticalAlignment="Bottom" Height="25" Click="btn_Calcular_Click" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True"/>
             <Button x:Name="btn_Limpiar" Content="Limpiar" VerticalAlignment="Center" Height="26" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" Click="btn_Limpiar_Click"/>
         </StackPanel>
-        <Label Content="Ingrese el radio" HorizontalAlignment="Left" Margin="82,13,0,0" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True"/>
+        <Label Content="Ingrese el Coodenada" HorizontalAlignment="Left" Margin="68,15,0,0" VerticalAlignment="Top" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" FontSize="10"/>
         <Label Content="Rx" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" FontSize="8" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True"/>
         <oxy:PlotView x:Name="GraficaE" Grid.Column="1" Margin="10,10,10,3" Grid.RowSpan="2" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" AutomationProperties.IsOffscreenBehavior="Onscreen"/>
         <Label Content="Ry" HorizontalAlignment="Left" Margin="55,22,0,0" VerticalAlignment="Top" FontSize="8" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True"/>
-        <TextBox x:Name="Text_A" TextWrapping="Wrap" Margin="186,10,93,78" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible"/>
-        <TextBlock x:Name="CoordenadasTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="206,0,0,74" TextWrapping="Wrap" Text="Elipse" Width="91" FontWeight="Bold" FontSize="20" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" Height="27" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="TextB" TextWrapping="Wrap" Margin="186,27,93,61" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="Text_A" TextWrapping="Wrap" Margin="187,27,54,61" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible"/>
+        <TextBlock x:Name="CoordenadasTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="219,-7,0,85" TextWrapping="Wrap" Text="Elipse" Width="90" FontWeight="Bold" FontSize="20" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" Height="27" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="TextB" TextWrapping="Wrap" Margin="187,10,54,78" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible"/>
         <Label Content="B" HorizontalAlignment="Left" Margin="167,25,0,0" VerticalAlignment="Top" FontSize="8" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True"/>
         <Label Content="A" HorizontalAlignment="Left" Margin="167,10,0,0" VerticalAlignment="Top" FontSize="8" ScrollViewer.CanContentScroll="True" Grid.IsSharedSizeScope="True"/>
     </Grid>

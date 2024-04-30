@@ -28,7 +28,7 @@ namespace GRAF_WPC
         public MainWindow()
         {
             InitializeComponent();
-            
+
             GraficaC.Model = new PlotModel();
         }
 
@@ -261,7 +261,7 @@ namespace GRAF_WPC
             GraficaC.Model = plotModel;
         }
 
-       
+
         private void LimpiarDataGrid(DataGrid dataGrid)
         {
             dataGrid.Items.Clear();
