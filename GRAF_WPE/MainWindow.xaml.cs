@@ -335,8 +335,8 @@ namespace GRAF_WPE
             plotModel.Series.Add(puntosSeries);
 
             // Configurar los ejes del gráfico
-            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "X" });
-            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Y" });
+            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.All, Minimum = xCentro - 250, Maximum = xCentro + 250 });
+            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Right, Minimum = xCentro - 250, Maximum = yCentro + 250 });
 
             // Asignar el PlotModel al PlotView
             GraficaE.Model = plotModel;
